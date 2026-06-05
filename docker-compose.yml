@@ -1,0 +1,16 @@
+services:
+  django-app:
+    build: .
+    container_name: mds_django_app
+    # Mount thư mục hiện tại vào /app trong container để sửa code trên VSCode thì cập nhật luôn
+    volumes:
+      - .:/app
+    # Cổng cho Streamlit
+    ports:
+      - "8501:8501"
+    # Lệnh mặc định khi chạy docker-compose up
+    command: streamlit run app.py --server.port 8501 --server.address 0.0.0.0
+    # Giữ container chạy kể cả khi lệnh mặc định lỗi hoặc để có thể vào terminal
+    tty: true
+    stdin_open: true
+    restart: unless-stopped
