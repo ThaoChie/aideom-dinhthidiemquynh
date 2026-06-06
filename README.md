@@ -1,48 +1,73 @@
 # AIDEOM-VN Dashboard
 
-Hệ thống **AIDEOM-VN Dashboard** là một ứng dụng Web tương tác được xây dựng bằng **Streamlit** (Frontend) và các thư viện Tối ưu hóa/Phân tích Dữ liệu mạnh mẽ của Python (Backend: `pulp`, `scipy`, `gymnasium`, v.v.). Hệ thống này giúp trực quan hóa và giải quyết 12 bài toán mô hình ra quyết định khác nhau (từ Quy hoạch tuyến tính, TOPSIS, đến Học tăng cường).
-
-## Yêu cầu Hệ thống
-Bạn **không cần** cài đặt Python, Node.js hay bất kỳ môi trường phức tạp nào trên máy tính. Chỉ cần:
-1. **Docker Desktop** (hoặc Docker Engine).
-2. **Visual Studio Code (VS Code)** (kèm extension *Dev Containers* hoặc *Docker* nếu cần).
-
-## Hướng dẫn Chạy (Run) bằng Docker
-
-Dự án đã được cấu hình sẵn môi trường chuẩn chỉnh (Containerized) thông qua file `Dockerfile` và `docker-compose.yml`. Bạn chỉ cần làm theo 2 bước cực kỳ đơn giản sau:
-
-### Bước 1: Khởi động hệ thống
-1. Mở VS Code, mở thư mục dự án này.
-2. Mở Terminal trong VS Code (`Ctrl + ~`).
-3. Gõ lệnh sau để Docker tự động tải môi trường, cài đặt thư viện và khởi chạy ứng dụng:
-   ```bash
-   docker-compose up --build
-   ```
-   *(Lưu ý: Quá trình `--build` trong lần chạy đầu tiên có thể mất vài phút do Docker cần tải Python và biên dịch một số gói thư viện toán học).*
-
-### Bước 2: Truy cập ứng dụng
-Sau khi Terminal báo `Uvicorn running on http://0.0.0.0:8501`, hãy mở trình duyệt web của bạn và truy cập vào đường link:
-
-👉 **[http://localhost:8501](http://localhost:8501)**
-
-Mọi thứ đã sẵn sàng! Giao diện Premium Dashboard với Sidebar điều hướng mượt mà sẽ xuất hiện.
+Hệ thống **AIDEOM-VN Dashboard** là một ứng dụng Web tương tác được xây dựng bằng **Streamlit** (Frontend) và các thư viện Tối ưu hóa/Phân tích Dữ liệu mạnh mẽ của Python (Backend: `scipy.optimize`, `pulp`, `gymnasium`, v.v.). Hệ thống này giúp trực quan hóa và giải quyết 12 bài toán mô hình ra quyết định khác nhau (từ Quy hoạch tuyến tính, TOPSIS, Tối ưu động liên thời gian đến Học tăng cường).
 
 ---
 
-## 🛠 Cách lập trình (Development) với VS Code + Docker
+## 🚀 Hướng dẫn Chạy Hệ thống (Local)
 
-Hệ thống được cấu hình Volume Mount trong `docker-compose.yml` (`volumes: - .:/app`). Điều này mang lại một sức mạnh tuyệt vời:
-- **Hot-Reload:** Bất kỳ thay đổi nào bạn thực hiện trên code (ví dụ sửa file `app.py` hay `src/optimization.py`) trong VS Code sẽ lập tức được tự động đồng bộ vào Container.
-- Trình duyệt sẽ tự động phát hiện thay đổi và làm mới (refresh) giao diện mà bạn **không cần** phải khởi động lại lệnh `docker-compose up` hay build lại image!
+Bạn có thể chạy dự án này bằng **Docker** (nhanh nhất) hoặc cài đặt trực tiếp **Python** trên máy tính (MacOS / Windows).
 
-### Cách tắt hệ thống
-Khi không còn sử dụng, bạn hãy quay lại Terminal đang chạy lệnh trên và bấm tổ hợp phím `Ctrl + C` để dừng server, hoặc gõ lệnh:
+### Lựa chọn 1: Chạy trực tiếp bằng Python (Khuyên dùng)
+Yêu cầu máy tính đã cài đặt sẵn Python (phiên bản 3.10 trở lên).
+
+**Dành cho MacOS / Linux:**
+```bash
+# 1. Tạo môi trường ảo (Virtual Environment)
+python3 -m venv venv
+
+# 2. Kích hoạt môi trường
+source venv/bin/activate
+
+# 3. Cài đặt các thư viện cần thiết
+pip install -r requirements.txt
+
+# 4. Khởi chạy Dashboard
+streamlit run app.py
+```
+
+**Dành cho Windows:**
+```powershell
+# 1. Tạo môi trường ảo
+python -m venv venv
+
+# 2. Kích hoạt môi trường
+.\venv\Scripts\activate
+
+# 3. Cài đặt các thư viện cần thiết
+pip install -r requirements.txt
+
+# 4. Khởi chạy Dashboard
+streamlit run app.py
+```
+
+Sau khi chạy lệnh cuối cùng, trình duyệt sẽ tự động mở trang web tại địa chỉ: 👉 **http://localhost:8501**
+
+---
+
+### Lựa chọn 2: Chạy bằng Docker (Không cần cài đặt Python)
+Yêu cầu máy tính đã cài đặt **Docker Desktop**.
+
+```bash
+# Khởi động hệ thống (Lần đầu tiên sẽ mất khoảng 2-3 phút để tải thư viện)
+docker-compose up --build
+```
+Truy cập ứng dụng tại: 👉 **http://localhost:8501**
+
+Để dừng hệ thống, bạn gõ `Ctrl + C` trên Terminal hoặc chạy lệnh:
 ```bash
 docker-compose down
 ```
 
-## Cấu trúc Dự án (Project Structure)
-- `app.py`: Tệp tin chạy giao diện Streamlit (Frontend).
-- `src/`: Chứa các thuật toán xử lý tối ưu, dữ liệu (Backend).
-- `data/`: Các file dữ liệu CSV/Excel đầu vào.
-- `Dockerfile` & `docker-compose.yml`: Cấu hình môi trường Containerized hoàn chỉnh.
+---
+
+## 📁 Cấu trúc Dự án
+- `app.py`: Tệp tin giao diện chính của Streamlit (Frontend Dashboard).
+- `src/`: Chứa các thuật toán xử lý tối ưu (Backend).
+  - `optimization.py`: Lõi giải thuật các bài toán (LP, NLP, NSGA-II, Scipy SLSQP, v.v.).
+  - `rl_env.py`: Môi trường Học tăng cường (Reinforcement Learning) cho Bài 11.
+  - `data_loader.py`: Xử lý nạp dữ liệu.
+- `notebooks/`: Chứa các file Jupyter Notebook tương ứng cho 12 bài, được tự động sinh ra từ bộ mã nguồn `src/` bằng công cụ `generate_notebooks.py`.
+- `data/`: Thư mục chứa các tệp tin CSV/Excel đầu vào.
+- `outputs/`: Thư mục lưu trữ các hình ảnh đồ thị và bảng kết quả dạng tĩnh.
+- `Dockerfile` & `docker-compose.yml`: Cấu hình môi trường Container chuẩn.
