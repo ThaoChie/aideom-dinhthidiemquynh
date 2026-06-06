@@ -11,3 +11,4 @@ pymysql
 cryptography
 pymoo
 streamlit-option-menu
+cvxpy>=1.3
