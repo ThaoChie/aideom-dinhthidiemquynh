@@ -66,9 +66,12 @@ def apply_premium_layout(fig):
         yaxis=dict(showgrid=True, gridcolor='rgba(0,0,0,0.05)', zeroline=False),
     )
     for trace in fig.data:
-        if hasattr(trace, 'line') and getattr(trace, 'type', '') != 'sankey':
-            trace.line.shape = 'spline'
-            trace.line.width = 3
+        if hasattr(trace, 'line') and getattr(trace, 'type', '') == 'scatter':
+            try:
+                trace.line.shape = 'spline'
+                trace.line.width = 3
+            except ValueError:
+                pass
     return fig
 
 
@@ -472,8 +475,8 @@ elif page == pages[6]:
     st.title("Bài 7: Tối ưu đa mục tiêu (NSGA-II)")
     with st.expander("⚙️ Bảng điều khiển thông số (Topbar)", expanded=True):
         c1, c2, c3 = st.columns(3)
-        n_gen = c1.slider("Số thế hệ (generations)", 50, 300, 200, 50)
-        pop_size = c2.slider("Kích thước quần thể", 50, 200, 100, 50)
+        n_gen = c1.number_input("Số thế hệ (generations)", min_value=50, max_value=300, value=200, step=10)
+        pop_size = c2.number_input("Kích thước quần thể", min_value=50, max_value=200, value=100, step=10)
     
     with st.spinner("Đang chạy NSGA-II tối ưu hóa 4 mục tiêu..."):
         res = solve_bai07(n_gen, pop_size)
