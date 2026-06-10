@@ -306,16 +306,17 @@ def solve_bai04(budget=50000, w_gdp=0.40, w_equity=0.25, w_ai=0.20, fairness_cv=
     gamma_val = 0.002
     lam = 0.6
     
-    def solve_pulp(use_equity=True):
+    def solve_pulp(use_c3=True, use_c5=True):
         m = pulp.LpProblem('VN_Digital_Budget', pulp.LpMaximize)
         x = pulp.LpVariable.dicts('x', (regions, items), lowBound=0)
         m += pulp.lpSum(beta_adj[(r, j)] * x[r][j] for r in regions for j in items)
         m += pulp.lpSum(x[r][j] for r in regions for j in items) <= budget
-        for r in regions:
-            m += pulp.lpSum(x[r][j] for j in items) >= 5000
-            m += pulp.lpSum(x[r][j] for j in items) <= 12000
+        if use_c3:
+            for r in regions:
+                m += pulp.lpSum(x[r][j] for j in items) >= 5000
+                m += pulp.lpSum(x[r][j] for j in items) <= 12000
         m += pulp.lpSum(x[r]['H'] for r in regions) >= 12000
-        if use_equity:
+        if use_c5:
             Dmax = pulp.LpVariable('Dmax')
             for r in regions:
                 m += D0[r] + gamma_val * x[r]['D'] <= Dmax
@@ -329,7 +330,7 @@ def solve_bai04(budget=50000, w_gdp=0.40, w_equity=0.25, w_ai=0.20, fairness_cv=
         return False, 0, {}
 
     # 1. PuLP Base
-    ok, z, alloc_table = solve_pulp(use_equity=True)
+    ok, z, alloc_table = solve_pulp(use_c3=True, use_c5=True)
     
     # 2. CVXPY Base
     cvxpy_ok, cvxpy_z, cvxpy_alloc = False, 0.0, {}
@@ -361,8 +362,11 @@ def solve_bai04(budget=50000, w_gdp=0.40, w_equity=0.25, w_ai=0.20, fairness_cv=
     except ImportError:
         pass
         
-    # 3. PuLP No Equity (Bỏ C5)
-    ok_noeq, z_noeq, alloc_noeq = solve_pulp(use_equity=False)
+    # 3. PuLP No Equity C5
+    ok_noeq, z_noeq, alloc_noeq = solve_pulp(use_c3=True, use_c5=False)
+    
+    # 4. PuLP No Region Bounds C3
+    ok_noc3, z_noc3, alloc_noc3 = solve_pulp(use_c3=False, use_c5=True)
     
     return {
         'status': 'Optimal' if ok else 'Infeasible',
@@ -374,6 +378,9 @@ def solve_bai04(budget=50000, w_gdp=0.40, w_equity=0.25, w_ai=0.20, fairness_cv=
         'no_equity_z': z_noeq,
         'no_equity_alloc': alloc_noeq,
         'equity_cost': z_noeq - z if ok and ok_noeq else 0,
+        'noc3_z': z_noc3,
+        'noc3_alloc': alloc_noc3,
+        'c3_cost': z_noc3 - z if ok and ok_noc3 else 0,
         'feasible': ok,
     }
 

@@ -374,6 +374,25 @@ elif page == pages[3]:
     fig_noeq = apply_premium_layout(fig_noeq)
     st.plotly_chart(fig_noeq, use_container_width=True)
 
+    # --- (5) Bỏ C3: Chi phí giới hạn ngân sách vùng ---
+    st.subheader("5. Chi phí kinh tế của công bằng vùng miền (bỏ C3) heatmap")
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Z* có C3 (Giới hạn vùng)", f"{res['Z']:,.1f}")
+    col2.metric("Z* không C3", f"{res['noc3_z']:,.1f}")
+    col3.metric("Chi phí (ΔZ)", f"{res['c3_cost']:,.1f} tỷ VND", delta=f"-{res['c3_cost']:,.1f}")
+    if res['c3_cost'] > 0:
+        st.warning(f"Ràng buộc ngân sách tối thiểu/tối đa cho từng vùng (C3) làm giảm GDP gain **{res['c3_cost']:,.1f} tỷ VND**.")
+    else:
+        st.info("Ràng buộc C3 không làm giảm Z*.")
+    # Heatmap so sánh
+    df_noc3 = pd.DataFrame(res['noc3_alloc']).T
+    fig_noc3 = px.imshow(df_noc3,
+                         labels=dict(x="Hạng mục", y="Vùng", color="Ngân sách (Tỷ VND)"),
+                         title="Heatmap KHÔNG có ràng buộc ngân sách vùng (bỏ C3)",
+                         color_continuous_scale="Oranges", aspect="auto", text_auto=",.0f")
+    fig_noc3 = apply_premium_layout(fig_noc3)
+    st.plotly_chart(fig_noc3, use_container_width=True)
+
 # ─── Bài 5 ───
 elif page == pages[4]:
     st.title("Bài 5: Tối ưu hóa danh mục dự án đầu tư công")
