@@ -20,18 +20,18 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap');
 html, body, [class*="css"] { font-family: 'Be Vietnam Pro', sans-serif; }
-.stApp { background-color: #f4f5f9; color: #333; }
-[data-testid="stSidebar"] { background-image: linear-gradient(180deg, #ffffff 0%, #f9f9fc 100%); border-right: none; box-shadow: 2px 0 15px rgba(0,0,0,0.03); }
-[data-testid="stSidebar"] h1 { font-size: 1.5rem !important; font-weight: 800 !important; background: linear-gradient(135deg, #f36270 0%, #d44d82 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.stButton>button { background: linear-gradient(135deg, #8a58cb 0%, #6350c3 100%); color: white; border-radius: 8px; border: none; font-weight: 700; transition: all 0.3s; box-shadow: 0 4px 10px rgba(99,80,195,0.3); }
-.stButton>button:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(99,80,195,0.4); }
+.stApp { background: linear-gradient(180deg, #e0f2fe 0%, #ffffff 100%); background-attachment: fixed; color: #333; }
+[data-testid="stSidebar"] { background-image: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%); border-right: none; box-shadow: 2px 0 15px rgba(0,0,0,0.03); }
+[data-testid="stSidebar"] h1 { font-size: 1.5rem !important; font-weight: 800 !important; background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.stButton>button { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); color: white; border-radius: 8px; border: none; font-weight: 700; transition: all 0.3s; box-shadow: 0 4px 10px rgba(37,99,235,0.3); }
+.stButton>button:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(37,99,235,0.4); }
 div.block-container { padding-top: 2rem; }
 .stDataFrame { border-radius: 12px; overflow: hidden; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
 .st-expander { background: #fff; border-radius: 12px; border: none !important; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
 
 /* Custom Gradient Cards via native Streamlit CSS */
 [data-testid="stMetric"] {
-    background: linear-gradient(135deg, #f36270 0%, #d44d82 100%);
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
     border-radius: 15px;
     padding: 15px 20px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
@@ -45,13 +45,13 @@ div.block-container { padding-top: 2rem; }
 [data-testid="stMetric"]:hover { transform: translateY(-3px); box-shadow: 0 12px 25px rgba(0,0,0,0.12); }
 [data-testid="stMetricLabel"] { font-size: 0.95rem; font-weight: 600; opacity: 0.9; color: white !important; }
 [data-testid="stMetricValue"] { font-size: 2rem; font-weight: 800; color: white !important; text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-[data-testid="stMetricDelta"] > div { color: #ffe0e0 !important; opacity: 0.9; }
+[data-testid="stMetricDelta"] > div { color: #e0f2fe !important; opacity: 0.9; }
 
 /* Dynamic gradient distribution based on nth-child to make metrics look varied */
-[data-testid="stMetric"]:nth-child(4n+1) { background: linear-gradient(135deg, #f36270 0%, #d44d82 100%); }
-[data-testid="stMetric"]:nth-child(4n+2) { background: linear-gradient(135deg, #8a58cb 0%, #6350c3 100%); }
-[data-testid="stMetric"]:nth-child(4n+3) { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
-[data-testid="stMetric"]:nth-child(4n+4) { background: linear-gradient(135deg, #f9903d 0%, #f1b745 100%); }
+[data-testid="stMetric"]:nth-child(4n+1) { background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); }
+[data-testid="stMetric"]:nth-child(4n+2) { background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%); }
+[data-testid="stMetric"]:nth-child(4n+3) { background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); }
+[data-testid="stMetric"]:nth-child(4n+4) { background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%); }
 
 </style>
 """, unsafe_allow_html=True)
@@ -97,9 +97,9 @@ with st.sidebar:
         orientation="vertical",
         styles={
             "container": {"padding": "0!important", "background-color": "transparent"},
-            "icon": {"color": "#8a58cb", "font-size": "16px"}, 
-            "nav-link": {"font-family": "'Be Vietnam Pro', sans-serif", "font-size": "15px", "text-align": "left", "margin":"0px", "--hover-color": "#f4f5f9"},
-            "nav-link-selected": {"font-family": "'Be Vietnam Pro', sans-serif", "background": "linear-gradient(135deg, #f36270 0%, #d44d82 100%)", "color": "white", "icon-color": "white"},
+            "icon": {"color": "#3b82f6", "font-size": "16px"}, 
+            "nav-link": {"font-family": "'Be Vietnam Pro', sans-serif", "font-size": "15px", "text-align": "left", "margin":"0px", "--hover-color": "#f0f7ff"},
+            "nav-link-selected": {"font-family": "'Be Vietnam Pro', sans-serif", "background": "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)", "color": "white", "icon-color": "white"},
         }
     )
 
