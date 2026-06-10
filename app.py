@@ -98,8 +98,8 @@ with st.sidebar:
         styles={
             "container": {"padding": "0!important", "background-color": "transparent"},
             "icon": {"color": "#8a58cb", "font-size": "16px"}, 
-            "nav-link": {"font-size": "15px", "text-align": "left", "margin":"0px", "--hover-color": "#f4f5f9"},
-            "nav-link-selected": {"background": "linear-gradient(135deg, #f36270 0%, #d44d82 100%)", "color": "white", "icon-color": "white"},
+            "nav-link": {"font-family": "'Be Vietnam Pro', sans-serif", "font-size": "15px", "text-align": "left", "margin":"0px", "--hover-color": "#f4f5f9"},
+            "nav-link-selected": {"font-family": "'Be Vietnam Pro', sans-serif", "background": "linear-gradient(135deg, #f36270 0%, #d44d82 100%)", "color": "white", "icon-color": "white"},
         }
     )
 
