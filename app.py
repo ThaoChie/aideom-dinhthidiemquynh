@@ -89,7 +89,7 @@ pages = [
 
 with st.sidebar:
     selected = option_menu(
-        menu_title="Điều hướng",
+        menu_title="",
         options=pages,
         icons=['bar-chart', 'wallet', 'list-task', 'map', 'check-square', 'sort-numeric-up', 'bullseye', 'diagram-3', 'people', 'dice-5', 'robot', 'box'],
         menu_icon="cast",
