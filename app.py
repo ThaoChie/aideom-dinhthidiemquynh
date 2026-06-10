@@ -112,12 +112,12 @@ if page == pages[0]:
     st.title("Bài 1: Hàm sản xuất Cobb-Douglas mở rộng")
     with st.expander("⚙️ Bảng điều khiển thông số (Topbar)", expanded=True):
         c1, c2, c3 = st.columns(3)
-        alpha = c1.slider("α (Vốn K)", 0.10, 0.50, 0.33, 0.01)
-        beta  = c2.slider("β (Lao động L)", 0.10, 0.60, 0.42, 0.01)
-        gamma = c3.slider("γ (Số hóa D)", 0.01, 0.30, 0.10, 0.01)
+        alpha = c1.number_input("α (Vốn K)", 0.10, 0.50, 0.33, 0.01)
+        beta  = c2.number_input("β (Lao động L)", 0.10, 0.60, 0.42, 0.01)
+        gamma = c3.number_input("γ (Số hóa D)", 0.01, 0.30, 0.10, 0.01)
         c1, c2, c3 = st.columns(3)
-        delta = c1.slider("δ (AI)", 0.01, 0.20, 0.08, 0.01)
-        theta = c2.slider("θ (Nhân lực H)", 0.01, 0.20, 0.07, 0.01)
+        delta = c1.number_input("δ (AI)", 0.01, 0.20, 0.08, 0.01)
+        theta = c2.number_input("θ (Nhân lực H)", 0.01, 0.20, 0.07, 0.01)
     res = solve_bai01(DATA_DIR, alpha, beta, gamma, delta, theta)
 
     # --- (1) Đồ thị A_t theo năm ---
@@ -170,9 +170,9 @@ elif page == pages[1]:
     st.title("Bài 2: Quy hoạch tuyến tính phân bổ ngân sách")
     with st.expander("⚙️ Bảng điều khiển thông số (Topbar)", expanded=True):
         c1, c2, c3 = st.columns(3)
-        tb  = c1.slider("Tổng ngân sách", 50, 200, 100, 5)
-        mi  = c2.slider("Min I (Hạ tầng)", 5, 50, 25)
-        mai = c3.slider("Min AI", 5, 50, 15)
+        tb  = c1.number_input("Tổng ngân sách", 50, 200, 100, 5)
+        mi  = c2.number_input("Min I (Hạ tầng)", 5, 50, 25)
+        mai = c3.number_input("Min AI", 5, 50, 15)
     res = solve_bai02(budget=tb, min_I=mi, min_AI=mai)
 
     # --- (1) Giải bằng linprog ---
@@ -242,15 +242,15 @@ elif page == pages[2]:
     st.title("Bài 3: Xây dựng chỉ số ưu tiên ngành")
     with st.expander("⚙️ Bảng điều khiển thông số (Topbar)", expanded=True):
         c1, c2, c3 = st.columns(3)
-        w_growth = c1.slider("w Tăng trưởng", 0.0, 0.5, 0.15, 0.01)
-        w_prod = c2.slider("w Năng suất", 0.0, 0.5, 0.15, 0.01)
-        w_spill = c3.slider("w Lan tỏa", 0.0, 0.5, 0.20, 0.01)
+        w_growth = c1.number_input("w Tăng trưởng", 0.0, 0.5, 0.15, 0.01)
+        w_prod = c2.number_input("w Năng suất", 0.0, 0.5, 0.15, 0.01)
+        w_spill = c3.number_input("w Lan tỏa", 0.0, 0.5, 0.20, 0.01)
         c1, c2, c3 = st.columns(3)
-        w_exp = c1.slider("w Xuất khẩu", 0.0, 0.5, 0.15, 0.01)
-        w_emp = c2.slider("w Việc làm", 0.0, 0.5, 0.10, 0.01)
-        w_ai = c3.slider("w AI Readiness", 0.0, 0.5, 0.20, 0.01)
+        w_exp = c1.number_input("w Xuất khẩu", 0.0, 0.5, 0.15, 0.01)
+        w_emp = c2.number_input("w Việc làm", 0.0, 0.5, 0.10, 0.01)
+        w_ai = c3.number_input("w AI Readiness", 0.0, 0.5, 0.20, 0.01)
         c1, c2, c3 = st.columns(3)
-        w_risk = c1.slider("w Rủi ro (Penalty)", 0.0, 0.5, 0.15, 0.01)
+        w_risk = c1.number_input("w Rủi ro (Penalty)", 0.0, 0.5, 0.15, 0.01)
     res = solve_bai03(w_growth=w_growth, w_productivity=w_prod, w_spillover=w_spill, w_export=w_exp, w_employment=w_emp, w_ai=w_ai, w_risk=w_risk)
 
     # --- (1) Ma trận chuẩn hóa min-max ---
@@ -308,11 +308,11 @@ elif page == pages[3]:
     st.title("Bài 4: LP Phân bổ ngân sách ngành - vùng")
     with st.expander("⚙️ Bảng điều khiển thông số (Topbar)", expanded=True):
         c1, c2, c3 = st.columns(3)
-        budget = c1.slider("Tổng ngân sách (Tỷ VND)", 20000, 80000, 50000, 5000)
-        w_gdp = c2.slider("w GDP", 0.0, 1.0, 0.40, 0.05)
-        w_equity = c3.slider("w Công bằng", 0.0, 1.0, 0.25, 0.05)
+        budget = c1.number_input("Tổng ngân sách (Tỷ VND)", 20000, 80000, 50000, 5000)
+        w_gdp = c2.number_input("w GDP", 0.0, 1.0, 0.40, 0.05)
+        w_equity = c3.number_input("w Công bằng", 0.0, 1.0, 0.25, 0.05)
         c1, c2, c3 = st.columns(3)
-        w_ai = c1.slider("w AI", 0.0, 1.0, 0.20, 0.05)
+        w_ai = c1.number_input("w AI", 0.0, 1.0, 0.20, 0.05)
     res = solve_bai04(budget, w_gdp=w_gdp, w_equity=w_equity, w_ai=w_ai)
 
     # --- (1) PuLP + CBC: Ma trận 6×4 + Z* ---
@@ -379,11 +379,11 @@ elif page == pages[4]:
     st.title("Bài 5: Tối ưu hóa danh mục dự án đầu tư công")
     with st.expander("⚙️ Bảng điều khiển thông số (Topbar)", expanded=True):
         c1, c2, c3 = st.columns(3)
-        budget = c1.slider("Ngân sách tổng (Tỷ VND)", 40000, 120000, 80000, 5000)
-        w_gdp = c2.slider("w GDP (b5)", 0.0, 1.0, 0.40, 0.05)
-        w_equity = c3.slider("w Công bằng (b5)", 0.0, 1.0, 0.30, 0.05)
+        budget = c1.number_input("Ngân sách tổng (Tỷ VND)", 40000, 120000, 80000, 5000)
+        w_gdp = c2.number_input("w GDP (b5)", 0.0, 1.0, 0.40, 0.05)
+        w_equity = c3.number_input("w Công bằng (b5)", 0.0, 1.0, 0.30, 0.05)
         c1, c2, c3 = st.columns(3)
-        w_ai = c1.slider("w AI (b5)", 0.0, 1.0, 0.30, 0.05)
+        w_ai = c1.number_input("w AI (b5)", 0.0, 1.0, 0.30, 0.05)
     res = solve_bai05(budget, w_gdp=w_gdp, w_equity=w_equity, w_ai=w_ai)
     
     st.subheader("1. Kết quả giải gốc (PuLP - CBC)")
@@ -430,13 +430,13 @@ elif page == pages[5]:
         if weight_mode == 1:
             st.write("Cấu hình trọng số chuyên gia:")
             c1, c2, c3 = st.columns(3)
-            w_grdp = c1.slider("w GRDP/capita", 0.0, 0.5, 0.10, 0.01)
-            w_digi = c2.slider("w Digital", 0.0, 0.5, 0.10, 0.01)
-            w_ai = c3.slider("w AI ready", 0.0, 0.5, 0.15, 0.01)
+            w_grdp = c1.number_input("w GRDP/capita", 0.0, 0.5, 0.10, 0.01)
+            w_digi = c2.number_input("w Digital", 0.0, 0.5, 0.10, 0.01)
+            w_ai = c3.number_input("w AI ready", 0.0, 0.5, 0.15, 0.01)
             c1, c2, c3 = st.columns(3)
-            w_labor = c1.slider("w Lao động", 0.0, 0.5, 0.20, 0.01)
-            w_rd = c2.slider("w R&D", 0.0, 0.5, 0.15, 0.01)
-            w_gini = c3.slider("w Gini (cost)", 0.0, 0.5, 0.15, 0.01)
+            w_labor = c1.number_input("w Lao động", 0.0, 0.5, 0.20, 0.01)
+            w_rd = c2.number_input("w R&D", 0.0, 0.5, 0.15, 0.01)
+            w_gini = c3.number_input("w Gini (cost)", 0.0, 0.5, 0.15, 0.01)
             # Dữ liệu chỉ có 6 biến thay vì 8, do đó lấy 6 trọng số đầu và chuẩn hóa nếu cần
             w_expert = [w_grdp, w_digi, w_ai, w_labor, w_rd, w_gini]
             s = sum(w_expert)
@@ -533,11 +533,11 @@ elif page == pages[7]:
     st.title("Bài 8: Tối ưu động liên thời gian")
     with st.expander("⚙️ Bảng điều khiển thông số (Topbar)", expanded=True):
         c1, c2, c3 = st.columns(3)
-        discount = c1.slider("Chiết khấu δ", 0.0, 0.15, 0.05, 0.01)
-        cap_growth = c2.slider("Tăng vốn/năm", 0.02, 0.12, 0.06, 0.01)
-        target_ai = c3.slider("Mục tiêu AI 2035", 0.5, 1.0, 0.85, 0.05)
+        discount = c1.number_input("Chiết khấu δ", 0.0, 0.15, 0.05, 0.01)
+        cap_growth = c2.number_input("Tăng vốn/năm", 0.02, 0.12, 0.06, 0.01)
+        target_ai = c3.number_input("Mục tiêu AI 2035", 0.5, 1.0, 0.85, 0.05)
         c1, c2, c3 = st.columns(3)
-        bud_growth = c1.slider("Tăng NS/năm", 0.03, 0.15, 0.08, 0.01)
+        bud_growth = c1.number_input("Tăng NS/năm", 0.03, 0.15, 0.08, 0.01)
     res = solve_bai08(discount=discount, capital_growth=cap_growth, target_ai=target_ai, budget_growth=bud_growth)
     
     st.subheader("1. Giải bằng scipy.optimize.minimize (SLSQP)")
@@ -577,11 +577,11 @@ elif page == pages[8]:
     st.title("Bài 9: Mô phỏng tác động AI lên lao động")
     with st.expander("⚙️ Bảng điều khiển thông số (Topbar)", expanded=True):
         c1, c2, c3 = st.columns(3)
-        ai_rate = c1.slider("Tốc độ áp dụng AI", 0.10, 0.70, 0.30, 0.05)
-        retrain = c2.slider("Ngân sách đào tạo (Nghìn tỷ)", 5, 50, 15, 5)
-        speed = c3.slider("Tốc độ chuyển đổi", 0.1, 1.0, 0.5, 0.1)
+        ai_rate = c1.number_input("Tốc độ áp dụng AI", 0.10, 0.70, 0.30, 0.05)
+        retrain = c2.number_input("Ngân sách đào tạo (Nghìn tỷ)", 5, 50, 15, 5)
+        speed = c3.number_input("Tốc độ chuyển đổi", 0.1, 1.0, 0.5, 0.1)
         c1, c2, c3 = st.columns(3)
-        new_job = c1.slider("Hệ số việc mới/AI", 0.1, 0.8, 0.4, 0.05)
+        new_job = c1.number_input("Hệ số việc mới/AI", 0.1, 0.8, 0.4, 0.05)
     res = solve_bai09(ai_adoption_rate=ai_rate, retraining_budget=retrain, transition_speed=speed, new_job_multiplier=new_job)
     
     st.subheader("1. Phân bổ tối ưu (PuLP)")
@@ -621,11 +621,11 @@ elif page == pages[9]:
     st.title("Bài 10: Quy hoạch ngẫu nhiên 2 giai đoạn")
     with st.expander("⚙️ Bảng điều khiển thông số (Topbar)", expanded=True):
         c1, c2, c3 = st.columns(3)
-        p1 = c1.slider("P(Lạc quan)", 0.0, 1.0, 0.3, 0.05)
-        p2 = c2.slider("P(Cơ sở)", 0.0, 1.0, 0.45, 0.05)
-        p3 = c3.slider("P(Bi quan)", 0.0, 1.0, 0.2, 0.05)
+        p1 = c1.number_input("P(Lạc quan)", 0.0, 1.0, 0.3, 0.05)
+        p2 = c2.number_input("P(Cơ sở)", 0.0, 1.0, 0.45, 0.05)
+        p3 = c3.number_input("P(Bi quan)", 0.0, 1.0, 0.2, 0.05)
         c1, c2, c3 = st.columns(3)
-        budget = c1.slider("Ngân sách GĐ1 (Nghìn tỷ)", 30, 80, 65, 5)
+        budget = c1.number_input("Ngân sách GĐ1 (Nghìn tỷ)", 30, 80, 65, 5)
     res = solve_bai10(p_optimistic=p1, p_baseline=p2, p_pessimistic=p3, first_stage_cap=budget)
     
     st.subheader("1. So sánh Lợi nhuận kỳ vọng")
@@ -657,9 +657,9 @@ elif page == pages[10]:
     st.title("Bài 11: Học tăng cường (Q-learning & DQN)")
     with st.expander("⚙️ Bảng điều khiển thông số (Topbar)", expanded=True):
         c1, c2, c3, c4 = st.columns(4)
-        alpha = c1.slider("Learning rate α", 0.01, 0.5, 0.1, 0.01)
-        gamma = c2.slider("Discount γ", 0.5, 0.99, 0.95, 0.01)
-        episodes = c3.slider("Số episodes", 1000, 20000, 10000, 1000)
+        alpha = c1.number_input("Learning rate α", 0.01, 0.5, 0.1, 0.01)
+        gamma = c2.number_input("Discount γ", 0.5, 0.99, 0.95, 0.01)
+        episodes = c3.number_input("Số episodes", 1000, 20000, 10000, 1000)
         use_dqn = c4.checkbox("Huấn luyện DQN (stable-baselines3)", value=True)
         
     with st.spinner("Đang huấn luyện Agent (Vui lòng đợi vài giây)..."):
@@ -696,7 +696,7 @@ elif page == pages[11]:
         scenario = c1.selectbox("Kịch bản:", ['S1','S2','S3','S4','S5'], index=4,
             format_func=lambda s: {'S1':'S1. Truyền thống','S2':'S2. Số hóa nhanh','S3':'S3. AI dẫn dắt','S4':'S4. Bao trùm số','S5':'S5. Tối ưu cân bằng'}[s])
         c1, c2, c3 = st.columns(3)
-        budget = c1.slider("Ngân sách tổng (Tỷ VND)", 10000, 100000, 50000, 5000)
+        budget = c1.number_input("Ngân sách tổng (Tỷ VND)", 10000, 100000, 50000, 5000)
     res = solve_bai12_dashboard(DATA_DIR, budget, scenario)
     
     st.info(f"**Mô tả kịch bản:** {res['description']}")
